@@ -180,5 +180,5 @@ DB_PASSWORD=secret
 詳細はこちらの[バージョン6用のドキュメント](https://readouble.com/laravel/6.0/ja/authentication.html)を読んでください。
 
 ## Appendix
-
+test
 その他不明点あれば先生に聞いてください。
