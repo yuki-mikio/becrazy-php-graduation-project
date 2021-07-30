@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/add' , 'PostController@add');
+
+Route::post('/add' , 'PostController@added');
+
+Route::get('/list' , 'PostController@list');
+
+Route::post('/list' , 'PostController@read');
+
+Route::get('/read' , 'PostController@read');
+
+Route::get('/edit' , 'PostController@edit');
+
+Route::get('/editForm' , 'PostController@editForm');
+
+Route::post('/edited' , 'PostController@edited');
+
+Route::post('/delete' , 'PostController@delete');
