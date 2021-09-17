@@ -63,6 +63,18 @@
                 <dt>スラッグ</dt>
                 <dd><input type="text" name="slug" required value="{{ $edit->slug }}"></dd>
             </dl>
+            <dl>
+                <dt>カテゴリー</dt>
+                @foreach ($categories as $category)
+                <input type="radio" name="category_id" value="{{ $category->id}}">{{$category->name}}
+                @endforeach
+            </dl>
+            <dl>
+                <dt>タグ</dt>
+                @foreach ($tags as $tag)
+                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id}}">{{$tag->name}}
+                @endforeach
+            </dl>
             <input type="submit" value="更新">
         </form>
    </div>

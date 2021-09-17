@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>記事追加</title>
+    <title>カテゴリ･タグ編集</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -33,7 +33,7 @@
 </head>
 <body>
     <div class="flex-center position-ref">
-        <h1>記事追加フォーム</h1>
+        <h1>カテゴリ･タグ編集フォーム</h1>
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -45,36 +45,20 @@
         @endif
         <form method="POST">
             @csrf
+            <input type="hidden" name="id" value="{{ $edit->id }}">
             <dl>
-                <dt>タイトル</dt>
-                <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
-            </dl>
-            <dl>
-                <dt>本文</dt>
-                <dd><textarea name="content" required>{{ old('content') }}</textarea></dd>
-            </dl>
-            <dl>
-                <dt>ステータス</dt>
-                <input type="radio" name="status" value="publish" checked="checked">公開
-                <input type="radio" name="status" value="draft">下書き
+                <dt>名前</dt>
+                <dd><input type="text" name="name" required value="{{ $edit->name }}"></dd>
             </dl>
             <dl>
                 <dt>スラッグ</dt>
-                <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
+                <dd><input type="text" name="slug" maxlength="200" required value="{{ $edit->slug }}"></dd>
             </dl>
             <dl>
-                <dt>カテゴリー</dt>
-                @foreach ($categories as $category)
-                <input type="radio" name="category_id" value="{{ $category->id}}">{{$category->name}}
-                @endforeach
+                <dt>説明(任意)</dt>
+                <dd><input type="text" name="description" value="{{ $edit->description }}"></dd>
             </dl>
-            <dl>
-                <dt>タグ</dt>
-                @foreach ($tags as $tag)
-                <input type="checkbox" name="tag_id" value="{{ $tag->id}}">{{$tag->name}}
-                @endforeach
-            </dl>
-            <input type="submit" value="保存">
+            <input type="submit" value="更新">
         </form>
     </div>
 </body>

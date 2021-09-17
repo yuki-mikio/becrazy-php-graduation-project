@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>編集リスト</title>
+    <title>カテゴリ･タグ</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -33,25 +33,32 @@
 </head>
 <body>
     <div class="flex-center position-ref">
-        <h1>記事一覧</h1><h2><a href="http://localhost:8000/add">記事作成</a></h2>
-        <p><a href="http://localhost:8000/taxonomylist?type=tag">タグ</a>
-           <a href="http://localhost:8000/taxonomylist?type=category">カテゴリ</a>
-        </p>
-
+        @if($title === 'category')
+            <h1>カテゴリ一覧</h1>
+        @else
+            <h1>タグ一覧</h1>
+        @endif
+        <h2><a href="http://localhost:8000/taxonomy">追加</a></h2>
+        <form method="POST" action="taxonomydel">
+            @csrf
             <table border="1" cellspacing="0" cellpadding="5" align="left">
                 <tr>
-                    <th>タイトル</th>
+                    <th><input type="submit" value="削除する"></th>
+                    <th>名称</th>
                 </tr>
                     @foreach ($lists as $list)
                     <tr>
-                        <td>
-                            <a href="http://localhost:8000/read?id={{$list->id}}">
-                            {{ $list->title }}</a>
+                        <td> 
+                            <input type="checkbox" name="id" value="{{ $list->id }}">
                         </td>
-                    </tr>
-                        @endforeach
+                        <td>
+                            <a href="http://localhost:8000/taxonomyEdit?id={{$list->id}}">{{ $list->name }}
+                            </a>
+                        </td>
+                    </tr> 
+                    @endforeach
             </table>
-
+        </form>
     </div>
 </body>
 </html>

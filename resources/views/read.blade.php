@@ -36,6 +36,18 @@
         <h1>{{ $read->title }}</h1>
             @csrf
             {{ $read->content }}
+            <dl>
+                <dt>カテゴリー</dt>
+                 @foreach ($category as $category)
+                {{ $category->name }}
+                @endforeach
+            </dl>
+            <dl>
+                <dt>タグ</dt>
+                @foreach ($tags as $tag)
+                {{ $tag->name }}
+                @endforeach
+            </dl>
         <form method="GET" action="edit">
             <input type="hidden" name="id" value="{{ $read->id }}">
             <input type="submit" value="編集する">

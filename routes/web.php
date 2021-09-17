@@ -21,8 +21,6 @@ Route::post('/add' , 'PostController@added');
 
 Route::get('/list' , 'PostController@list');
 
-Route::post('/list' , 'PostController@read');
-
 Route::get('/read' , 'PostController@read');
 
 Route::get('/edit' , 'PostController@edit');
@@ -32,3 +30,15 @@ Route::get('/editForm' , 'PostController@editForm');
 Route::post('/edited' , 'PostController@edited');
 
 Route::post('/delete' , 'PostController@delete');
+
+Route::get('/taxonomy' , 'PostController@taxonomy');
+
+Route::post('/taxonomy' , 'PostController@taxonomyAdd');
+
+Route::get('/taxonomylist' , 'PostController@taxonomylist');
+
+Route::get('/taxonomyEdit' , 'PostController@taxonomyEdit');
+
+Route::post('/taxonomyEdit' , 'PostController@taxonomyEdited');
+
+Route::post('/taxonomydel' , 'PostController@del');
