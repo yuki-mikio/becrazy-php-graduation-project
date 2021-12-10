@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>記事編集</title>
+    <title>記事</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -34,28 +34,24 @@
 <body>
     <div class="flex-center position-ref">
         <h1>{{ $read->title }}</h1>
-            @csrf
-            {{ $read->content }}
+            {!! $read->content !!}
+        
             <dl>
                 <dt>カテゴリー</dt>
                  @foreach ($category as $category)
-                {{ $category->name }}
+                <a href="http://localhost:8000/category/{{$category->slug}}">
+                    {{ $category->name }}
+                </a>
                 @endforeach
             </dl>
             <dl>
                 <dt>タグ</dt>
                 @foreach ($tags as $tag)
-                {{ $tag->name }}
+                <a href="http://localhost:8000/category/{{$tag->slug}}">
+                    {{ $tag->name }}
+                </a>
                 @endforeach
             </dl>
-        <form method="GET" action="edit">
-            <input type="hidden" name="id" value="{{ $read->id }}">
-            <input type="submit" value="編集する">
-        </form>
-        <form method="POST" action="delete">
-            @csrf
-            <input type="hidden" name="id" value="{{ $read->id }}">
-            <input type="submit" value="削除する">
         </form>
     </div>
 </body>

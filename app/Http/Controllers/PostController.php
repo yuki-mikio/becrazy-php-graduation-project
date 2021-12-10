@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
 
+
 class PostController extends Controller {
+
+	public function __construct() {
+
+    $this->middleware('auth');
+    }
 
 	public function add(){
 		$categories = Taxonomy::where('type' , 'category')->get();
@@ -37,12 +43,12 @@ class PostController extends Controller {
 		return view ('list' , ['lists' => $lists]);
 	}
 
-	public function read(){
-		$read = Post::find($_GET["id"]);
-		$category = $read->taxonomy()->where('type' , 'category')->get();
-		$tags = $read->taxonomy()->where('type' , 'tag')->get();
+	public function check(){
+		$check = Post::find($_GET["id"]);
+		$category = $check->taxonomy()->where('type' , 'category')->get();
+		$tags = $check->taxonomy()->where('type' , 'tag')->get();
 
-	return view('read' , ['read' => $read , 'category' => $category , 'tags' => $tags]);
+	return view('check' , ['check' => $check , 'category' => $category , 'tags' => $tags]);
 	}
 
 	public function edit(){
@@ -111,7 +117,6 @@ class PostController extends Controller {
 	public function del(Request $request){
 		$request->validate([
 			'id' => 'required']);
-
 		$taxonomy = Taxonomy::Find($request->id);
         $taxonomy->posts()->detach();
 		Taxonomy::destroy($request->id);
@@ -137,5 +142,13 @@ class PostController extends Controller {
 		$taxonomy->save();
 		return redirect('/list');
 	}
+
+	public function catalist(){
+		$cata = Taxonomy::find($_GET["id"]);
+		return view('catalist' , ['cata' => $cata]);
+	}
+
+
+
 }
 ?>

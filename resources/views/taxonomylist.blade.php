@@ -44,6 +44,7 @@
             <table border="1" cellspacing="0" cellpadding="5" align="left">
                 <tr>
                     <th><input type="submit" value="削除する"></th>
+                    <th>編集</th>
                     <th>名称</th>
                 </tr>
                     @foreach ($lists as $list)
@@ -55,7 +56,11 @@
                             <a href="http://localhost:8000/taxonomyEdit?id={{$list->id}}">{{ $list->name }}
                             </a>
                         </td>
-                    </tr> 
+                        <td>
+                            <a href="http://localhost:8000/catalist?id={{$list->id}}">{{ $list->name }}
+                            </a>
+                        </td>
+                    </tr>
                     @endforeach
             </table>
         </form>
