@@ -1,81 +1,60 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('adminlte::page')
 
-    <title>記事追加</title>
+@section('title', '記事追加')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content_header')
+    <h1>カテゴリ･タグ追加フォーム</h1>
+@stop
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .flex-center {
-            align-items: center;
-            margin: 100px 300px 100px 300px;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-    <div class="flex-center position-ref">
-        <h1>記事追加フォーム</h1>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <form method="POST">
-            @csrf
-            <dl>
-                <dt>タイトル</dt>
-                <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
-            </dl>
-            <dl>
-                <dt>本文</dt>
-                <dd><textarea name="content" required>{{ old('content') }}</textarea></dd>
-            </dl>
-            <dl>
-                <dt>ステータス</dt>
-                <input type="radio" name="status" value="publish" checked="checked">公開
-                <input type="radio" name="status" value="draft">下書き
-            </dl>
-            <dl>
-                <dt>スラッグ</dt>
-                <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
-            </dl>
-            <dl>
-                <dt>カテゴリー</dt>
-                @foreach ($categories as $category)
-                <input type="radio" name="category_id" value="{{ $category->id}}">{{$category->name}}
-                @endforeach
-            </dl>
-            <dl>
-                <dt>タグ</dt>
-                @foreach ($tags as $tag)
-                <input type="checkbox" name="tag_id" value="{{ $tag->id}}">{{$tag->name}}
-                @endforeach
-            </dl>
-            <input type="submit" value="保存">
-        </form>
+@section('content')
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-</body>
-</html>
+    @endif
+    <div class="card card-primary">
+        <div class="card-header">
+            <h1 class="card-title">記事追加フォーム</h1>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+            @csrf
+                <dl>
+                    <dt>タイトル</dt>
+                    <dd><input type="text" class="form-control" style="width: 40%;" name="title" required></dd>
+                </dl>
+                <dl>
+                    <dt>本文</dt>
+                    <dd><textarea class="form-control" style="width: 50%;" rows="3" name="content" required/></textarea></dd>
+                </dl>
+                <label>ステータス</label>
+                <div class="form-group">
+                    <input type="radio" name="status" value="publish" checked="checked">公開
+                    <input type="radio" name="status" value="draft">下書き
+                </div>
+                <dl>
+                    <dt>スラッグ</dt>
+                    <dd><input type="text" class="form-control" style="width: 30%;" name="slug" required ></dd>
+                </dl>
+                <label>カテゴリー</label>
+                <div class="form-group">
+                    @foreach ($categories as $category)
+                    <input type="radio" name="category_id" value="{{ $category->id}}">{{$category->name}}
+                    @endforeach
+                </div>
+                <label>タグ</label>
+                <div class="form-group">
+                    @foreach ($tags as $tag)
+                    <input type="checkbox" name="tag_ids[]" value="{{ $tag->id}}">
+                    {{$tag->name}}
+                    @endforeach
+                </div>
+                <button type="button submit" class="btn btn-primary btn-lg">保存</button>
+            </form>
+        </div>
+    </div>
+@stop

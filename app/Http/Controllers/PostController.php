@@ -25,7 +25,9 @@ class PostController extends Controller {
 			'title' => 'required|string',
 			'content' => 'required|string',
 			'status' => 'required|string',
-			'slug' => 'required|string'
+			'slug' => 'required|string',
+			'category_id' => 'nullable',
+			'tag_ids' => 'array'
 		]);
 		$post = new Post();
 		$post->user_id = 1;
@@ -35,6 +37,8 @@ class PostController extends Controller {
 		$post->slug = $request->slug;
 		$post->mime_type = 'text/html';
 		$post->save();
+		$post->taxonomy()->attach($request->tag_ids);
+		$post->taxonomy()->attach($request->category_id);
 		return redirect ('/list');
 	}
 
@@ -56,17 +60,17 @@ class PostController extends Controller {
 		$categories = Taxonomy::where('type' , 'category')->get();
 		$tags = Taxonomy::where('type' , 'tag')->get();
 		return view('editForm' , ['edit' => $edit , 'categories' => $categories , 'tags' => $tags]);
-	} 
+	}
 
 	public function edited(Request $request){
 		$request->validate([
 			'id' => 'required',
 			'title' => 'required|string',
-		    'content' => 'required|string',
-		    'status' => 'required|String',
-		    'slug' => 'required|string',
-		    'category_id' => 'nullable',
-		    'tag_ids' => 'array'
+			'content' => 'required|string',
+			'status' => 'required|String',
+			'slug' => 'required|string',
+			'category_id' => 'nullable',
+			'tag_ids' => 'array'
 		]);
 		$post = Post::find($request->id);
 		$post->title = $request->title;
@@ -74,8 +78,8 @@ class PostController extends Controller {
 		$post->status = $request->status;
 		$post->slug = $request->slug;
 		$post->save();
-        $post->taxonomy()->sync($request->tag_ids);
-        $post->taxonomy()->attach($request->category_id);
+		$post->taxonomy()->sync($request->tag_ids);
+		$post->taxonomy()->attach($request->category_id);
 		return redirect('/list');
 	}
 

@@ -1,69 +1,47 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('adminlte::page')
 
-    <title>カテゴリ･タグ</title>
+@section('title')
+    @if($title === 'category')
+        カテゴリ一覧
+    @else
+        タグ一覧
+    @endif
+@stop
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content_header')
+    @if($title === 'category')
+        <h1>カテゴリ一覧</h1>
+    @else
+        <h1>タグ一覧</h1>
+    @endif
+@stop
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .flex-center {
-            align-items: center;
-            margin: 100px 300px 100px 300px;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-    <div class="flex-center position-ref">
-        @if($title === 'category')
-            <h1>カテゴリ一覧</h1>
-        @else
-            <h1>タグ一覧</h1>
-        @endif
-        <h2><a href="http://localhost:8000/taxonomy">追加</a></h2>
-        <form method="POST" action="taxonomydel">
-            @csrf
-            <table border="1" cellspacing="0" cellpadding="5" align="left">
-                <tr>
-                    <th><input type="submit" value="削除する"></th>
-                    <th>編集</th>
-                    <th>名称</th>
-                </tr>
-                    @foreach ($lists as $list)
-                    <tr>
-                        <td> 
-                            <input type="checkbox" name="id" value="{{ $list->id }}">
-                        </td>
-                        <td>
-                            <a href="http://localhost:8000/taxonomyEdit?id={{$list->id}}">{{ $list->name }}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="http://localhost:8000/catalist?id={{$list->id}}">{{ $list->name }}
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-            </table>
-        </form>
+@section('content')
+    <div class="row">
+        @foreach ($lists as $list)
+        <div class="col-md-3 col-sm-6 col-10">
+            <a href="http://localhost:8000/catalist?id={{$list->id}}">
+                <div class="info-box bg-info">
+                    <h4>{{ $list->name }}</h4>
+                    <div class="info-box-content">
+                        <div align="right" card-tools>
+                            <form action="taxonomyEdit" method="GET">
+                                <button type="submit" class="btn btn-tool" name="id" value="{{ $list->id }}">
+                                    <i class="fas fa-wrench fa-2x"></i>
+                                </button>
+                            </form>
+                            <form method="POST" action="taxonomydel">
+                            @csrf 
+                                <button type="submit" name="id" value="{{ $list->id }}" class="btn btn-tool">
+                                    <i class="fas fa-trash-alt fa-2x"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                
+                </div>
+            </a>
+        </div>
+        @endforeach
     </div>
-</body>
-</html>
+@stop

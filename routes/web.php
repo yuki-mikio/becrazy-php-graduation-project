@@ -16,7 +16,7 @@ Route::get('/add' , 'PostController@add');
 
 Route::post('/add' , 'PostController@added');
 
-Route::get('/list' , 'PostController@list');
+Route::get('/list' , 'PostController@list')->name('list');
 
 Route::get('/check' , 'PostController@check');
 

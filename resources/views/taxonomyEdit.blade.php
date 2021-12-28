@@ -1,65 +1,43 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('adminlte::page')
 
-    <title>カテゴリ･タグ編集</title>
+@section('title', 'カテゴリ･タグ編集')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content_header')
+    <h1></h1>
+@stop
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .flex-center {
-            align-items: center;
-            margin: 100px 300px 100px 300px;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-    <div class="flex-center position-ref">
-        <h1>カテゴリ･タグ編集フォーム</h1>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+@section('content')
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="card card-white">
+        <div class="card-header">
+            <h1 class="card-title">カテゴリ･タグ編集フォーム</h1>
         </div>
-        @endif
-        <form method="POST">
+        <div class="card-body">
+            <form method="POST">
             @csrf
             <input type="hidden" name="id" value="{{ $edit->id }}">
             <dl>
                 <dt>名前</dt>
-                <dd><input type="text" name="name" required value="{{ $edit->name }}"></dd>
+                <dd><input type="text" name="name" class="form-control rounded-0" style="width: 200px;" required value="{{ $edit->name }}"></dd>
             </dl>
             <dl>
                 <dt>スラッグ</dt>
-                <dd><input type="text" name="slug" maxlength="200" required value="{{ $edit->slug }}"></dd>
+                <dd><input type="text" name="slug" class="form-control rounded-0" style="width: 200px;" maxlength="200" required value="{{ $edit->slug }}"></dd>
             </dl>
             <dl>
                 <dt>説明(任意)</dt>
-                <dd><input type="text" name="description" value="{{ $edit->description }}"></dd>
+                <dd><input type="text" name="description" class="form-control rounded-0" style="width: 200px;" value="{{ $edit->description }}"></dd>
             </dl>
-            <input type="submit" value="更新">
-        </form>
+            <button type="button submit" class="btn btn-default btn-lg">更新</button>
+            </form>
+        </div>
     </div>
-</body>
-</html>
+@stop

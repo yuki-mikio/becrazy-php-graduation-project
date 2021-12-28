@@ -1,66 +1,48 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('adminlte::page')
 
-    <title>記事</title>
+@section('title', '記事')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content_header')
+    <h1>プレビュー</h1>
+@stop
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .flex-center {
-            align-items: center;
-            margin: 100px 300px 100px 300px;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-    <div class="flex-center position-ref">
-        <h1>{{ $check->title }}</h1>
-            @csrf
+@section('content')
+    @csrf
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ $check->title }}</h3>
+        </div>
+        <div class="card-body">
             {{ $check->content }}
-            <dl>
-                <dt>カテゴリー</dt>
-                 @foreach ($category as $category)
+        </div>
+        <div class="card-footer">
+            <label>カテゴリー</label>
+            <div>
+                @foreach ($category as $category)
                 <a href="http://localhost:8000/catalist?id={{$category->id}}">
                     {{ $category->name }}
                 </a>
                 @endforeach
-            </dl>
-            <dl>
-                <dt>タグ</dt>
+            </div>
+            <label>タグ</label>
+            <div>
                 @foreach ($tags as $tag)
                 <a href="http://localhost:8000/catalist?id={{$tag->id}}">
                     {{ $tag->name }}
                 </a>
                 @endforeach
-            </dl>
+            </div>
+        </div>
+    </div>
         <form method="GET" action="edit">
             <input type="hidden" name="id" value="{{ $check->id }}">
-            <input type="submit" value="編集する">
-        </form>
+            <button type="button submit" class="btn btn-success btn-lg">記事編集
+            </button>
+        </form><br/>
         <form method="POST" action="delete">
             @csrf
             <input type="hidden" name="id" value="{{ $check->id }}">
-            <input type="submit" value="削除する">
+            <button type="button submit" class="btn btn-danger btn-lg">記事削除
+            </button>
         </form>
-    </div>
-</body>
-</html>
+ @stop

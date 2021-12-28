@@ -9,7 +9,7 @@ use App\Models\Taxonomy;
 class ReadController extends Controller {
 
 	public function top(){
-		$lists = Post::where('status' , 'publish')->get();
+		$lists = Post::latest()->where('status' , 'publish')->take(3)->get();
 		return view('read/top' , [ 'lists' => $lists]);
 	}
 

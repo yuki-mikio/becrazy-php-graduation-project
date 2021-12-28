@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>admin</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -82,13 +82,12 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
-
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
+    'layout_fixed_footer' => true,
+    'layout_dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -145,8 +144,8 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_mini' => null,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -226,44 +225,85 @@ return [
 
     'menu' => [
         // Navbar items:
+        /*検索バー
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
             'topnav_right' => true,
+        ],*/
+        [
+            'text'         => 'TOP',
+            'url'  => '/',
+            'topnav' => true,
         ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
+        
+        [
+            'text' => '管理',
+            'url'  => 'login',
+            'topnav_right' => true,
+        ],
         // Sidebar items:
+        /*検索機能
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
+        ],*/
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        /*ラベル見本
         [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+            'label'       => 3,
+            'label_color' => 'warning',
+        ],*/
+        ['header' => '編集機能'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => '記事一覧',
+            'url'  => '/list',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => '記事作成',
+            'url'  => 'add',
+            'icon' => 'fas fa-fw fa-file',
         ],
+        [
+            'text' => 'タグ',
+            'icon' => 'fas fa-fw fa-file',
+            'submenu' => [
+                [
+                    'text' => '一覧',
+                    'url'  => 'taxonomylist?type=tag',
+                ],
+                [
+                    'text' => '作成',
+                    'url'  => 'taxonomy',
+                ],
+            ]
+        ],
+        [
+            'text' => 'カテゴリ',
+            'icon' => 'fas fa-fw fa-file',
+            'submenu' => [
+                [
+                    'text' => '一覧',
+                    'url'  => 'taxonomylist?type=category',
+                ],
+                [
+                    'text' => '作成',
+                    'url'  => 'taxonomy',
+                ],
+            ]
+        ],
+        /*マルチ階層見本
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -301,7 +341,8 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ],*/
+        /*アイコン見本
         ['header' => 'labels'],
         [
             'text'       => 'important',
@@ -317,7 +358,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
