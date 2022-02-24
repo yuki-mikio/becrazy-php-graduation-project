@@ -51,6 +51,8 @@ Route::get('/read/{slug}' , 'ReadController@read');
 
 Route::get('/category/{slug}' , 'ReadController@category');
 
+Route::get('/article' , 'ReadController@article');
+
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

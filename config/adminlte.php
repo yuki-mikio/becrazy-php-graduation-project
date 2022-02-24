@@ -237,6 +237,11 @@ return [
             'topnav' => true,
         ],
         [
+            'text'         => '記事一覧',
+            'url'  => '/article',
+            'topnav' => true,
+        ],
+        [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],

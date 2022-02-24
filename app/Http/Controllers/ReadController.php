@@ -26,5 +26,10 @@ class ReadController extends Controller {
 		$lists = $category->posts()->where('status' , 'publish')->get();
 		return view('read/category' , ['lists' => $lists , 'category' => $category]);
 	}
+
+	public function article(){
+		$lists = Post::latest()->where('status' , 'publish')->get();
+		return view('read/article' , [ 'lists' => $lists]);
+	}
 }
 ?>

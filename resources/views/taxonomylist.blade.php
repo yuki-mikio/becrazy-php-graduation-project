@@ -25,12 +25,12 @@
                     <h4>{{ $list->name }}</h4>
                     <div class="info-box-content">
                         <div align="right" card-tools>
-                            <form action="taxonomyEdit" method="GET">
+                            <form action="taxonomyEdit" method="GET" style="display: inline">
                                 <button type="submit" class="btn btn-tool" name="id" value="{{ $list->id }}">
                                     <i class="fas fa-wrench fa-2x"></i>
                                 </button>
                             </form>
-                            <form method="POST" action="taxonomydel">
+                            <form method="POST" action="taxonomydel" style="display: inline" >
                             @csrf 
                                 <button type="submit" name="id" value="{{ $list->id }}" class="btn btn-tool">
                                     <i class="fas fa-trash-alt fa-2x"></i>
@@ -38,7 +38,6 @@
                             </form>
                         </div>
                     </div>
-                
                 </div>
             </a>
         </div>
