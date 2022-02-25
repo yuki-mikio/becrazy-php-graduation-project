@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         @foreach ($cata->posts as $list)
-        <div class="col-sm-3 mt-3"><a href="http://localhost:8000/check?id={{$list->id}}">
+        <div class="col-sm-3 mt-3"><a href="/check?id={{$list->id}}">
             <div class="position-relative p-3 bg-gray" style="height: 180px">
                 {{ $list->title }}<br/>
                 <small>作成日{{ $list->created_at }}</small>

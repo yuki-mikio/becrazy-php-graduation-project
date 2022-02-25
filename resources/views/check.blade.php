@@ -19,7 +19,7 @@
             <label>カテゴリー</label>
             <div>
                 @foreach ($category as $category)
-                <a href="http://localhost:8000/catalist?id={{$category->id}}">
+                <a href="/catalist?id={{$category->id}}">
                     {{ $category->name }}
                 </a>
                 @endforeach
@@ -27,7 +27,7 @@
             <label>タグ</label>
             <div>
                 @foreach ($tags as $tag)
-                <a href="http://localhost:8000/catalist?id={{$tag->id}}">
+                <a href="/catalist?id={{$tag->id}}">
                     {{ $tag->name }}
                 </a>
                 @endforeach

@@ -20,7 +20,7 @@
             <label>カテゴリー</label>
             <div>
                  @foreach ($category as $category)
-                <a href="http://localhost:8000/category/{{$category->slug}}">
+                <a href="/category/{{$category->slug}}">
                     {{ $category->name }}
                 </a>
                 @endforeach
@@ -28,7 +28,7 @@
             <label>タグ</label>
             <div>
                 @foreach ($tags as $tag)
-                <a href="http://localhost:8000/category/{{$tag->slug}}">
+                <a href="/category/{{$tag->slug}}">
                     {{ $tag->name }}
                 </a>
                 @endforeach

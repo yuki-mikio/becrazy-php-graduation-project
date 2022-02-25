@@ -20,7 +20,7 @@
     <div class="row">
         @foreach ($lists as $list)
         <div class="col-md-3 col-sm-6 col-10">
-            <a href="http://localhost:8000/catalist?id={{$list->id}}">
+            <a href="/catalist?id={{$list->id}}">
                 <div class="info-box bg-info">
                     <h4>{{ $list->name }}</h4>
                     <div class="info-box-content">

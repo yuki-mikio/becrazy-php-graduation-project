@@ -10,7 +10,7 @@
     <div class="row">
         @foreach ($lists as $list)
         <div class="col-sm-4 mt-5">
-            <a href="http://localhost:8000/read/{{$list->slug}}">
+            <a href="/read/{{$list->slug}}">
                 <div class="position-relative p-4 bg-teal" style="height: 200px">
                     {{ $list->title }}<br/>
                     <small>公開日{{ $list->created_at }}</small>
